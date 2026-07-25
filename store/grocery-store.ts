@@ -45,15 +45,16 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       const res = await fetch("/api/items");
       const payload = (await res.json()) as ItemsResponse;
 
-      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+      if (!res.ok) throw new Error(`Request gagal (${res.status})`);
       set({ items: payload.items });
     } catch (error) {
-      console.error("Error loading items:", error);
-      set({ error: "Something went wrong" });
+      console.error("Error memuat item:", error);
+      set({ error: "Terjadi kesalahan" });
     } finally {
       set({ isLoading: false });
     }
   },
+
 
   addItem: async (input) => {
     set({ error: null });
@@ -74,10 +75,12 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       set((state) => ({ items: [payload.item, ...state.items] }));
       return payload.item;
     } catch (error) {
-      console.error("Error adding item:", error);
-      set({ error: "Something went wrong" });
+      console.error("Error menambahkan item:", error);
+      set({ error: "Terjadi kesalahan" });
     }
   },
+
+
   updateQuantity: async (id, quantity) => {
     const nextQuantity = Math.max(1, quantity);
     set({ error: null });
@@ -94,10 +97,11 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
         items: state.items.map((item) => (item.id === id ? payload.item : item)),
       }));
     } catch (error) {
-      console.error("Error updating quantity:", error);
-      set({ error: "Something went wrong" });
+      console.error("Error update quantity:", error);
+      set({ error: "Terjadi kesalahan" });
     }
   },
+
 
   togglePurchased: async (id) => {
     const currentItem = get().items.find((item) => item.id === id);
@@ -119,10 +123,11 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
         items: state.items.map((item) => (item.id === id ? payload.item : item)),
       }));
     } catch (error) {
-      console.error("Error toggling purchased:", error);
-      set({ error: "Something went wrong" });
+      console.error("Error mengubah status pembelian:", error);
+      set({ error: "Terjadi kesalahan" });
     }
   },
+
 
   removeItem: async (id) => {
     set({ error: null });
@@ -132,10 +137,11 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
 
       set((state) => ({ items: state.items.filter((item) => item.id !== id) }));
     } catch (error) {
-      console.error("Error removing item:", error);
-      set({ error: "Something went wrong" });
+      console.error("Error menghapus item:", error);
+      set({ error: "Terjadi kesalahan" });
     }
   },
+
 
   clearPurchased: async () => {
     set({ error: null });
@@ -146,8 +152,8 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       const items = get().items.filter((item) => !item.purchased);
       set({ items });
     } catch (error) {
-      console.error("Error clearing purchased:", error);
-      set({ error: "Something went wrong" });
+      console.error("Error menghapus barang yang dibeli:", error);
+      set({ error: "Terjadi kesalahan" });
     }
   },
 }));

@@ -17,6 +17,7 @@ export default function TabsLayout() {
     useEffect(() => {
         loadItems()
     }, [])
+    
 
     if (!isLoaded) {
         return null
