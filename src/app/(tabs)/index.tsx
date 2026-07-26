@@ -17,7 +17,7 @@ export default function ListScreen() {
         data={pendingItems}
         keyExtractor={(item) => item.id}
         renderItem={({ item}) => <PendingItemCard item={item}/>}
-        contentContainerStyle={{ padding: 20, gap: 14}}
+        contentContainerStyle={{ padding: 20, gap: 10}}
         contentInsetAdjustmentBehavior="automatic"
         ListHeaderComponent={
             <View style={{ gap: 14, paddingTop: 20}}>
