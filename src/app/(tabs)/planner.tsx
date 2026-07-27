@@ -34,13 +34,13 @@ const PlannerScreen = () => {
         <View className="flex-row items-start justify-between">
           <View className="flex-1 pr-4">
             <Text className="text-xs font-semibold uppercase tracking-[1.2px] text-muted-foreground">
-              Grocery planner
+              Perencanaan belanja
             </Text>
             <Text className="mt-1 text-3xl font-bold leading-9 text-foreground">
               Plan smarter, shop calmer.
             </Text>
             <Text className="mt-2 text-sm leading-5 text-muted-foreground">
-              Organize your next grocery run with categories, quantities, and priority in one place.
+              Atur belanja berikutnya dengan kategori, jumlah, dan prioritas di satu tempat.
             </Text>
           </View>
 
@@ -77,10 +77,10 @@ const PlannerScreen = () => {
 
       <View className="px-1">
         <Text className="text-sm font-semibold uppercase tracking-[1px] text-muted-foreground">
-          Build your list
+          Susun Daftar belanja anda
         </Text>
         <Text className="mt-1 text-sm text-muted-foreground">
-          Add items with the right quantity, category, and urgency.
+          Tambah barang dengan jumlah, kategori, dan tingkat urgensi.
         </Text>
       </View>
 
