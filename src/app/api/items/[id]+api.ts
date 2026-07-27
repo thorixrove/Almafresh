@@ -4,7 +4,7 @@ import { deleteGroceryItem, setGroceryItemPurchased, updateGroceryItemQuantity }
 export async function PATCH(request: Request, {id}: {id: string}) {
     try {
         const body = await request.json()
-        const item = body.updateGroceryItemQuantity
+        const item = body.quantity !== undefined
         ? await updateGroceryItemQuantity(id, body.quantity)
         : await setGroceryItemPurchased(id, body.purchased ?? true)
 

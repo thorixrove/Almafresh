@@ -1,60 +1,91 @@
 import { useAuth } from "@clerk/expo";
-import { Redirect, Stack } from "expo-router";
-import { NativeTabs } from "expo-router/unstable-native-tabs";
-import { useGroceryStore } from "../../../store/grocery-store";
+import { Redirect, Tabs } from "expo-router";
 import { useColorScheme } from "nativewind";
 import { useEffect } from "react";
-
+import { FontAwesome6 } from "@expo/vector-icons";
+import { useGroceryStore } from "../../store/grocery-store";
 
 export default function TabsLayout() {
-    const {isSignedIn, isLoaded} = useAuth()
+  const { isSignedIn, isLoaded } = useAuth();
+  const { loadItems } = useGroceryStore();
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === "dark";
 
-    const { loadItems, items} = useGroceryStore()
-    const {colorScheme} = useColorScheme()
-    const isDark = colorScheme === "dark"
-    const tabTintColor = isDark ? "hsl(142 70% 54%)" : "hsl(147 75% 33%)"
+  const tabTintColor = isDark ? "hsl(142 70% 54%)" : "hsl(147 75% 33%)";
+  const inactiveColor = isDark ? "#8aa397" : "#6b7f74";
+  const barBackground = isDark ? "#0f1a15" : "#ffffff";
 
-    useEffect(() => {
-        loadItems()
-    }, [])
-    
+  useEffect(() => {
+    loadItems();
+  }, []);
 
-    if (!isLoaded) {
-        return null
-    }
+  if (!isLoaded) {
+    return null;
+  }
 
-    if(!isSignedIn) {
-        return<Redirect href="/(auth)/sign-in"/>
-    }
+  if (!isSignedIn) {
+    return <Redirect href="/(auth)/sign-in" />;
+  }
 
-    return (
-    <NativeTabs tintColor={tabTintColor}>
-      <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>List</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          sf={{
-            default: "list.bullet.clipboard",
-            selected: "list.bullet.clipboard.fill",
-          }}
-          md="list"
-        />
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="planner">
-        <NativeTabs.Trigger.Icon
-          sf={{ default: "plus.circle", selected: "plus.circle.fill" }}
-          md="add"
-        />
-        <NativeTabs.Trigger.Label>Planner</NativeTabs.Trigger.Label>
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="insights">
-        <NativeTabs.Trigger.Icon
-          sf={{ default: "chart.bar", selected: "chart.bar.fill" }}
-          md="analytics"
-        />
-        <NativeTabs.Trigger.Label>Insights</NativeTabs.Trigger.Label>
-      </NativeTabs.Trigger>
-    </NativeTabs>
-    )
+  return (
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: tabTintColor,
+        tabBarInactiveTintColor: inactiveColor,
+        tabBarStyle: {
+                     borderTopLeftRadius: 40,
+                     borderTopRightRadius: 40,
+                     borderBottomLeftRadius: 40,
+                     borderBottomRightRadius: 40,
+                     marginHorizontal: 24,
+                     height: 60,
+                     position: 'absolute',
+                     bottom: 45,
+                     backgroundColor: 'black',
+                     shadowColor: '#1a1a1a',
+                     shadowOffset: { width: 5, height: 5},
+                     shadowOpacity: 0.1,
+                     shadowRadius: 3,
+                     elevation: 5,
+                     borderTopWidth: 0,   
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: "600",
+        },
+        tabBarItemStyle: {
+          borderRadius: 22,
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "List",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6 name="list-check" size={size ?? 18} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="planner"
+        options={{
+          title: "Planner",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6 name="plus" size={size ?? 18} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="insights"
+        options={{
+          title: "Insights",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6 name="chart-simple" size={size ?? 18} color={color} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
 }

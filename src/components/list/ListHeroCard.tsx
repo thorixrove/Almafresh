@@ -1,5 +1,5 @@
-import { useGroceryStore } from "../../../store/grocery-store";
 import { Text, View } from "react-native";
+import { useGroceryStore } from "../../store/grocery-store";
 
 const ListHeroCard = () => {
   const {items} = useGroceryStore()

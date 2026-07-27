@@ -1,7 +1,7 @@
-import { GroceryCategory, GroceryPriority, useGroceryStore } from "../../../store/grocery-store";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useState } from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import { GroceryCategory, GroceryPriority, useGroceryStore } from "../../store/grocery-store";
 
 const categories: GroceryCategory[] = ["Produce", "Dairy", "Bakery", "Pantry", "Snacks"]
 const priorities: GroceryPriority[] = ["low", "medium", "high"]
@@ -28,22 +28,23 @@ const PlannerFormCard =  () => {
     setQuantity(value.replace(/[^0-9]/g, ""))
   }
 
-  const createItem = async () => {
-    await addItem({
+const createItem = async () => {
+    const result = await addItem({
       name: name.trim(),
       category,
       priority,
-      quantity: Number(quantity),
+      quantity: Number(quantity) || 1,   // fallback ke 1 kalau kosong/invalid
     })
 
-        // optional
-    // Alert.alert("Success", "Item created");
+    if (result) {
+      Alert.alert("Berhasil", "Item berhasil ditambahkan ke daftar belanja")
+    }
 
     setName("")
-    setQuantity("1")
+    setQuantity("")   // reset ke kosong lagi, bukan "1"
     setCategory("Produce")
     setPriority("medium")
-  }
+}
 
 
   return(

@@ -1,6 +1,6 @@
 import PendingItemCard from "@/components/list/PendingItemCard";
-import { useGroceryStore } from "../../../store/grocery-store";
 import { FlatList, Text, View } from "react-native";
+import { useGroceryStore } from "../../store/grocery-store";
 
 import CompletedItems from "@/components/list/CompletedItems";
 import ListHeroCard from "@/components/list/ListHeroCard";
