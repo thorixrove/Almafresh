@@ -73,7 +73,7 @@ export default function SignInScreen() {
                         disabled={isLoading}
                         onPress={() => handleSocialAuth("oauth_github")}
                         >
-                        <View className="h-8 items-center justify-center rounded-full bg-white">
+                        <View className="h-8 w-8 items-center justify-center rounded-full bg-white">
                             <FontAwesome name="github" size={24} color="#111"/>
                         </View>
                             <Text className="ml-3 flex-1 text-lg font-semibold text-card-foreground">

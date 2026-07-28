@@ -15,7 +15,8 @@ if (!publishableKey) {
 
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
-  integrations: [Sentry.feedbackIntegration()]
+  integrations: [Sentry.feedbackIntegration()],
+  debug: true,
 })
 
 export default Sentry.wrap(function RootLayout() {

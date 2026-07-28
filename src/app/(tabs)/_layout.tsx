@@ -13,7 +13,7 @@ export default function TabsLayout() {
 
   const tabTintColor = isDark ? "hsl(142 70% 54%)" : "hsl(147 75% 33%)";
   const inactiveColor = isDark ? "#8aa397" : "#6b7f74";
-  const barBackground = isDark ? "#0f1a15" : "#ffffff";
+
 
   useEffect(() => {
     loadItems();
